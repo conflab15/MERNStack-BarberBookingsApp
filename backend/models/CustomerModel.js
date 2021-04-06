@@ -30,6 +30,7 @@ const customerSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    
-
 })
+
+const Customer = mongoose.model('Customer', customerSchema)
+module.exports = Customer
