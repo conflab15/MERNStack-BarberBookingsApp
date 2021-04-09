@@ -5,7 +5,7 @@ const HaircutSchema = mongoose.Schema({
         type:String,
         required:true
     },
-    category_id:{
+    category:{
         type:String,
         required:true
     },
