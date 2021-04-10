@@ -1,22 +1,49 @@
 const mongoose = require('mongoose') 
 
 const bookingSchema = mongoose.Schema({
-    haircut_id:{
+    user:{
+        type: mongoose.Schema.Types.ObjectId,
+        required:true,
+        ref:'User'
+    },
+    style:{
         type:String,
         required:true
     },
-    datetime:{
-        type:Date,
+    bookingDate:{
+        type:String,
+        required:true
+        
+    },
+    bookingTime:{
+        type:String,
         required:true
     },
-    total_price:{
+     price:{
         type:Number,
-        required:true
+        required:true,
+        default:0
     },
-    customer_id:{
-        type:String,
-        required:true
+    isConfirmed:{
+        type:Boolean,
+        required:true,
+        default:false
+    },
+    isComplete:{
+        type:Boolean,
+        required:true,
+        default:false
+    },
+    isPaid:{
+        type:Boolean,
+        required:true,
+        default:false
+    },
+    paidAt:{
+        type:Date
     }
+},{
+    timestamps:true
 })
 
 const Booking = mongoose.model('Booking', bookingSchema)

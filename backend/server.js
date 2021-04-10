@@ -68,77 +68,112 @@ app.get('/api/reviews', async (req,res) => {
 })
 
 //Booking Routes
-//Finding all bookings for the user...
-app.get('/api/bookings', async (req,res) => {
-    //Obtaining the ID of the active user....
-    const email = req.body
-
-    //Finding the booking by the email of the users account...
-    const bookings = await Booking.findOne({email})
-    res.json(bookings)
-})
-
 //Finding a specific booking for the current user... 
-app.get('/api/bookings/:id', async (req, res) => {
-    
-    //Obtaining the ID of the active user....
-    const email = req.body
+app.get('/api/bookings/day/:id', async(req, res)=>{
 
-    //Finding the booking by the email of the users account...
-    const booking = await Booking.findOne({email})
+    const day = req.params.id
+    const bookings = await Booking.find({bookingDate: day})
 
-    console.log("User Email:")
-    console.log(email)
+    const slotTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00']
+    const bookedSlots = []
 
-    if(req.params.id.length === 24) {
-        //const booking = await booking.findById(req.params.id)
-        if(booking){
-            res.json(booking)
-        }
-        else{
-            res.status(404).json({message:"Oops, we couldn't find this booking"})
-        }
+    for (var i=0; i<bookings.length; i++){
+        bookedSlots.push(bookings[i].bookingTime)
     }
-    else{
-        res.status(404).json({message:"Oops, we couldn't find this booking"})
-    }
+
+    var available = slotTimes.filter((items) => !bookedSlots.includes(items))
+
+    res.json(available)
+
 })
 
 //Creating a new booking...
-app.post('api/bookings/add', async (req, res) => {
-    //Obtaining the ID of the active user....
-    const email = req.body
+app.post('/api/bookings', protect, async(req, res)=>{
+    
+    console.log('Request to make booking')
 
-    console.log(email) //Logging email for testing purposes... 
+    const {style, bookingDate, bookingTime, price} = req.body
 
-    //Obtaining variables from the request body...
-    const {haircutid, datetime, totalprice, customeremail} = req.body
+    const loggedInUser = await User.findOne({_id:req.user._id})
 
-    //Creating a new booking object...
+    console.log(loggedInUser)
+
+    if(!loggedInUser){
+        res.status(401).json({message:'User not found!'})
+    }
+
     const booking = await Booking.create({
-        haircutid,
-        datetime,
-        totalprice, 
-        customeremail
+        user: loggedInUser,
+        style,
+        price,
+        bookingDate, 
+        bookingTime
     })
 
-    //Checking Booking object is valid before posting to the db...
-    if (booking) {
+    if(booking){
         res.status(201).json({
-            _id: booking.id,
-            haircutid: booking.haircutid,
-            datetime: booking.datetime,
-            totalprice: booking.totalprice,
-            customeremail: booking.customeremail,
-            token: createToken(booking._id)
+            _id: booking._id,
+            user: booking.user.name,
+            price: booking.price,
+            bookingDate: booking.bookingDate,
+            bookingTime: booking.bookTime,
+            style
         })
     }
     else{
-        res.status(400)
-        throw new Error("Sorry, the object returned invalid, please try again")
+        res.status(400).json({message: 'Booking error - incorrect data!'})
+        throw new Error('Invalid data')
+    }
+})
+
+//Finding Users own Bookings
+app.get('/api/bookings/mybookings', protect, async(req, res)=>{
+
+    console.log(req.user)
+
+    const mybookings = await Booking.find({user: req.user._id})
+
+    if(mybookings){
+
+        if(mybookings.length===0){
+            res.json([])
+        }
+        else{
+            res.json(mybookings)
+        }
+    }
+})
+
+//ADMINISTRATOR ROUTES
+//Finding all bookings for the user...
+app.get('/api/bookings', protect, adminCheck, async(req, res)=>{
+
+    console.log('RRequesting all Bookings')
+
+    const bookings = await Booking.find({})
+
+    res.json(bookings)
+})
+
+//Updaing Bookings to confirm them for their clients...
+app.put('/api/bookings/:id', protect, adminCheck, async(req, res)=>{
+
+    console.log('Updating Bookings...')
+
+    const booking = await Booking.findById(req.params.id)
+
+    if (booking){
+        booking.isConfirmed = true
+        const updatedBooking = await booking.save()
+        res.json(updatedBooking)
+    }
+    else{
+        res.status(404).json({message:"We couldn't find this Booking!"})
+        throw new Error("We couldn't find that booking!")
     }
 
 })
+
 
 //Customer Routes
 //Customer Login and Authorisation
