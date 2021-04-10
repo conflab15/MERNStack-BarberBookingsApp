@@ -88,7 +88,7 @@ app.get('/api/bookings/day/:id', async(req, res)=>{
 })
 
 //Creating a new booking...
-app.post('/api/bookings', protect, async(req, res)=>{
+app.post('/api/bookings/create', protect, async(req, res)=>{
     
     console.log('Request to make booking')
 
@@ -127,7 +127,7 @@ app.post('/api/bookings', protect, async(req, res)=>{
 })
 
 //Finding Users own Bookings
-app.get('/api/bookings/mybookings', protect, async(req, res)=>{
+app.get('/api/bookings/personalbookings', protect, async(req, res)=>{
 
     console.log(req.user)
 
@@ -148,9 +148,9 @@ app.get('/api/bookings/mybookings', protect, async(req, res)=>{
 //Finding all bookings for the user...
 app.get('/api/bookings', protect, adminCheck, async(req, res)=>{
 
-    console.log('RRequesting all Bookings')
+    console.log('Requesting all Bookings')
 
-    const bookings = await Booking.find({})
+    const bookings = await Booking.find({}) //Getting all bookings...
 
     res.json(bookings)
 })
@@ -164,11 +164,11 @@ app.put('/api/bookings/:id', protect, adminCheck, async(req, res)=>{
 
     if (booking){
         booking.isConfirmed = true
-        const updatedBooking = await booking.save()
+        const updatedBooking = await booking.save() //Updating the bookings to confirm them for the customers...
         res.json(updatedBooking)
     }
     else{
-        res.status(404).json({message:"We couldn't find this Booking!"})
+        res.status(404).json({message:"We couldn't find this Booking!"}) //Error Messages 
         throw new Error("We couldn't find that booking!")
     }
 

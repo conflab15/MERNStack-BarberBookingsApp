@@ -1,18 +1,132 @@
 import axios from 'axios'
 
-export const bookingDetails = (id) => async (dispatch) => {
-    
+export const listBookings = () => async (dispatch, getState) => {
+
     try {
-        dispatch({type: 'BOOKING_REQUEST'})
+        dispatch({type: 'BOOKING_LIST_REQUEST'})
 
-        const {data} = await axios.get(`/api/bookings/${id}`)
+        const {userLogin: {userInfo}} = getState()
 
-        dispatch({type: 'BOOKING_SUCCESS', payload: data})
+        const config = {
+            headers:{
+                Authorization: userInfo.token
+            }
+        }
+
+        const {data} = await axios.get('/api/bookings', config)
+
+        dispatch({type: 'BOOKING_LIST_SUCCESS', payload: data})
     }
     catch(error){
         dispatch({
-            type: 'BOOKING_FAIL',
+            type: 'BOOKING_LIST_FAIL',
             payload: error.message
         })
     }
+}
+
+export const personalBookingLists = () => async (dispatch, getState) => {
+    
+    try {
+        dispatch({type: 'PERSONAL_BOOKING_LISTS_REQUEST'})
+
+        const {userLogin: {userInfo}} = getState()
+
+        const config = {
+            headers: {
+                Authorization: userInfo.token
+            }
+        }
+
+        const {data} = await axios.get('/api/bookings/personalbookings', config)
+
+        dispatch({type: 'PERSONAL_BOOKING_LISTS_SUCCESS', payload: data})
+    }
+    catch(error){
+        //Pass an error message to the state
+        dispatch({
+            type: 'PERSONAL_BOOKING_LIST_FAIL',
+            payload: error.message
+        })
+
+    }
+}
+
+export const createNewBooking = (style, bookingTime, bookingDate, price) => async (dispatch, getState) =>{
+
+    try{
+        dispatch({type: 'CREATING_BOOKING_REQUEST'})
+
+        const {userLogin:{userInfo}} = getState() //Retrieving the active user
+
+        const config = {
+            headers:{
+                Authorization: userInfo.token //Token to authorize the session through JWT
+            }
+        }
+        
+        //Fetching data from the API, not all booking data is here because it is auto assigned as false for some properties...
+        const {data} = await axios.post('/api/bookings/create',{style, bookingTime, bookingDate, price}, config)
+
+        //The response from this action is being populated into a payload
+        dispatch({type: 'CREATING_BOOKING_SUCCESS', payload: data})
+    }
+    catch(error){
+        //Sending an error message
+        dispatch({
+            type: 'CREATING_BOOKING_FAIL',
+            payload: error.message
+        })
+    }
+}
+
+export const confirmBooking = (booking) => async (dispatch, getState) =>{
+
+    try{
+        dispatch({type: 'CONFIRM_BOOKING_REQUEST'})
+
+        const {userLogin:{userInfo}} = getState()
+
+        const config = {
+            headers:{
+                Authorization: userInfo.token
+            }
+        }
+
+        const {data} = await axios.put(`/api/bookings/${booking._id}`,{booking}, config)
+
+        dispatch({type: 'CONFIRM_BOOKING_SUCCESS', payload: data})
+    }
+    catch(error){
+        dispatch({
+            type: 'CONFIRM_BOOKING_FAIL',
+            payload: error.message
+        })
+    }
+}
+
+export const bookingByDay = (date) => async (dispatch, getState) =>{
+
+    try{
+        dispatch({type: 'BOOKING_DAY_LIST_REQUEST'})
+
+        const {userLogin:{userInfo}} = getState()
+
+        const config = {
+            headers:{
+                Authorization: userInfo.token
+            }
+        }
+
+        const {data} = await axios.get(`/api/bookings/day/${date}`, config)
+
+        dispatch({type: 'BOOKING_DAY_LIST_SUCCESS', payload: data})
+    }
+    catch(error){
+        dispatch({
+            type: 'BOOKING_DAY_LIST_FAIL',
+            payload: error.message
+        })
+    }
+
 }
