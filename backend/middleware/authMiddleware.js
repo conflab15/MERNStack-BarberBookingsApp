@@ -1,7 +1,7 @@
 //authorise/validate access to protected pages such as profile and admin
 
 const jwt = require('jsonwebtoken')
-const User = require('../models/UserModel')
+const Customer = require('../models/CustomerModel')
 
 const protect  = async (req, res, next) => {
 
@@ -11,13 +11,13 @@ const protect  = async (req, res, next) => {
         if (token){
        const decoded = jwt.verify(token, process.env.JWT_SECRET)
        console.log(decoded)
-       req.user = await User.findById(decoded.id).select('-password')
+       req.customer = await Customer.findById(decoded.id).select('-password')
        }
         if (!token){
        res.status(401)
        throw new Error('Not Authorised - No Token Found')
        }
-       console.log(req.user)
+       console.log(req.customer)
        next()
    }
    catch(error){

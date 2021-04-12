@@ -24,7 +24,7 @@ const Booking = require('./models/BookingModel')
 const Customer = require('./models/CustomerModel')
 const Haircut = require('./models/HaircutModel')
 const Review = require('./models/ReviewModel')
-const { default: userEvent } = require('@testing-library/react')
+const { default: customerEvent } = require('@testing-library/react')
 
 const PORT = process.env.PORT || 5000
 
@@ -68,7 +68,7 @@ app.get('/api/reviews', async (req,res) => {
 })
 
 //Booking Routes
-//Finding a specific booking for the current user... 
+//Finding a specific booking for the current customer... 
 app.get('/api/bookings/day/:id', async(req, res)=>{
 
     const day = req.params.id
@@ -94,16 +94,16 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
 
     const {style, bookingDate, bookingTime, price} = req.body
 
-    const loggedInUser = await User.findOne({_id:req.user._id})
+    const loggedIncustomer = await customer.findOne({_id:req.customer._id})
 
-    console.log(loggedInUser)
+    console.log(loggedIncustomer)
 
-    if(!loggedInUser){
-        res.status(401).json({message:'User not found!'})
+    if(!loggedIncustomer){
+        res.status(401).json({message:'customer not found!'})
     }
 
     const booking = await Booking.create({
-        user: loggedInUser,
+        customer: loggedIncustomer,
         style,
         price,
         bookingDate, 
@@ -113,7 +113,7 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
     if(booking){
         res.status(201).json({
             _id: booking._id,
-            user: booking.user.name,
+            customer: booking.customer.name,
             price: booking.price,
             bookingDate: booking.bookingDate,
             bookingTime: booking.bookTime,
@@ -126,12 +126,12 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
     }
 })
 
-//Finding Users own Bookings
+//Finding customers own Bookings
 app.get('/api/bookings/personalbookings', protect, async(req, res)=>{
 
-    console.log(req.user)
+    console.log(req.customer)
 
-    const mybookings = await Booking.find({user: req.user._id})
+    const mybookings = await Booking.find({customer: req.customer._id})
 
     if(mybookings){
 
@@ -145,7 +145,7 @@ app.get('/api/bookings/personalbookings', protect, async(req, res)=>{
 })
 
 //ADMINISTRATOR ROUTES
-//Finding all bookings for the user...
+//Finding all bookings for the customer...
 app.get('/api/bookings', protect, adminCheck, async(req, res)=>{
 
     console.log('Requesting all Bookings')
@@ -205,7 +205,7 @@ app.post('/api/customers/login', async(req, res) => {
 })
 
 //Customer Register Route
-app.post('/api/users/', async (req, res) => {
+app.post('/api/customers/', async (req, res) => {
 
     const {forename, surname, addressline1, addressline2, town, postcode, email, telephone} = req.body
 

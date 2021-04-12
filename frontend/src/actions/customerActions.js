@@ -17,7 +17,7 @@ export const login = (email, password) => async(dispatch) => {
             type: 'CUSTOMER_LOGIN_SUCCESS',
             payload: data
         })
-        localStorage.setItem('userInfo', JSON.stringify(data)) //Storing the Item within state data...
+        localStorage.setItem('customerInfo', JSON.stringify(data)) //Storing the Item within state data...
     }
     catch(error){
         dispatch({
@@ -34,12 +34,12 @@ export const getCustomerDetails = (id) => async(dispatch, getState) => {
             type: 'CUSTOMER_DETAILS_REQUEST'
         })
 
-        const {userLogin: {userInfo}} = getState();
+        const {customerLogin: {customerInfo}} = getState();
 
         const config = {
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: userInfo.token
+                Authorization: customerInfo.token
             }
         }
 
@@ -81,7 +81,7 @@ export const register = (forename, surname, addressline1, addressline2, town, po
             payload: data
         })
 
-        localStorage.setItem('userInfo', JSON.stringify(data))
+        localStorage.setItem('customerInfo', JSON.stringify(data))
     }
     catch(error){
         dispatch({
@@ -92,7 +92,7 @@ export const register = (forename, surname, addressline1, addressline2, town, po
 }
 
 export const logout = () =>(dispatch)=>{
-    localStorage.removeItem('userInfo')
+    localStorage.removeItem('customerInfo')
     dispatch({type:'CUSTOMER_DETAILS_RESET'})
     dispatch({type: 'CUSTOMER_LOGOUT'})
 }

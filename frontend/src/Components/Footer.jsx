@@ -1,5 +1,6 @@
 import React from 'react'
 import { Container, Row, Col, ListGroup } from 'react-bootstrap'
+import { LinkContainer } from 'react-router-bootstrap'
 
 const Footer = () => {
     return (
@@ -11,11 +12,12 @@ const Footer = () => {
                     </Col>
                     <Col>
                     <ListGroup>
-                        <ListGroup.Item>Cras justo odio</ListGroup.Item>
-                        <ListGroup.Item>Dapibus ac facilisis in</ListGroup.Item>
-                        <ListGroup.Item>Morbi leo risus</ListGroup.Item>
-                        <ListGroup.Item>Porta ac consectetur ac</ListGroup.Item>
-                        <ListGroup.Item>Vestibulum at eros</ListGroup.Item>
+                        <LinkContainer to='/haircut'>
+                            <ListGroup.Item>Haircuts</ListGroup.Item>
+                        </LinkContainer>
+                        <LinkContainer to='/reviews'>
+                            <ListGroup.Item>Reviews</ListGroup.Item>
+                        </LinkContainer>
                         </ListGroup>
                     </Col>
                 </Row>

@@ -5,11 +5,11 @@ export const listBookings = () => async (dispatch, getState) => {
     try {
         dispatch({type: 'BOOKING_LIST_REQUEST'})
 
-        const {userLogin: {userInfo}} = getState()
+        const {customerLogin: {customerInfo}} = getState()
 
         const config = {
             headers:{
-                Authorization: userInfo.token
+                Authorization: customerInfo.token
             }
         }
 
@@ -30,11 +30,11 @@ export const personalBookingLists = () => async (dispatch, getState) => {
     try {
         dispatch({type: 'PERSONAL_BOOKING_LISTS_REQUEST'})
 
-        const {userLogin: {userInfo}} = getState()
+        const {customerLogin: {customerInfo}} = getState()
 
         const config = {
             headers: {
-                Authorization: userInfo.token
+                Authorization: customerInfo.token
             }
         }
 
@@ -57,11 +57,11 @@ export const createNewBooking = (style, bookingTime, bookingDate, price) => asyn
     try{
         dispatch({type: 'CREATING_BOOKING_REQUEST'})
 
-        const {userLogin:{userInfo}} = getState() //Retrieving the active user
+        const {customerLogin:{customerInfo}} = getState() //Retrieving the active customer
 
         const config = {
             headers:{
-                Authorization: userInfo.token //Token to authorize the session through JWT
+                Authorization: customerInfo.token //Token to authorize the session through JWT
             }
         }
         
@@ -85,11 +85,11 @@ export const confirmBooking = (booking) => async (dispatch, getState) =>{
     try{
         dispatch({type: 'CONFIRM_BOOKING_REQUEST'})
 
-        const {userLogin:{userInfo}} = getState()
+        const {customerLogin:{customerInfo}} = getState()
 
         const config = {
             headers:{
-                Authorization: userInfo.token
+                Authorization: customerInfo.token
             }
         }
 
@@ -110,11 +110,11 @@ export const bookingByDay = (date) => async (dispatch, getState) =>{
     try{
         dispatch({type: 'BOOKING_DAY_LIST_REQUEST'})
 
-        const {userLogin:{userInfo}} = getState()
+        const {customerLogin:{customerInfo}} = getState()
 
         const config = {
             headers:{
-                Authorization: userInfo.token
+                Authorization: customerInfo.token
             }
         }
 
