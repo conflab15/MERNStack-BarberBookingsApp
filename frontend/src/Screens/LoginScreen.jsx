@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { LinkContainer } from 'react-bootstrap-router'
+import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col, FormControl } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 
@@ -35,9 +35,34 @@ const LoginScreen = ({ location, history }) => {
 
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
-                    
+                    <FormControl
+                    type='email'
+                    placeholder='Please enter your email...'
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    ></FormControl>
                 </Form.Group>
+
+                <Form.Group controlId = 'password'>
+                    <Form.Label>Password</Form.Label>
+                    <FormControl
+                    type='password'
+                    placeholder='Please enter your password...'
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
+                    ></FormControl>
+                </Form.Group>
+                <Button
+                    type='submit'
+                    variant='primary'
+                    >Sign In</Button>
+                {loading && <Loader />}
             </Form>
+            <Row className = 'py-3'>
+                <Col>
+                Are you a new customer? <Link to={redirect ? `/register?redirect=$redirect` : '/register'}>Sign up here!</Link>
+                </Col>
+            </Row>
         </FormContainer>
     )
 }
