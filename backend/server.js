@@ -117,7 +117,7 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
             price: booking.price,
             bookingDate: booking.bookingDate,
             bookingTime: booking.bookTime,
-            style
+            stylenpm 
         })
     }
     else{
@@ -146,7 +146,7 @@ app.get('/api/bookings/personalbookings', protect, async(req, res)=>{
 
 //ADMINISTRATOR ROUTES
 //Finding all bookings for the customer...
-app.get('/api/bookings', protect, adminCheck, async(req, res)=>{
+app.get('/api/bookings', protect, async(req, res)=>{
 
     console.log('Requesting all Bookings')
 
@@ -156,7 +156,8 @@ app.get('/api/bookings', protect, adminCheck, async(req, res)=>{
 })
 
 //Updaing Bookings to confirm them for their clients...
-app.put('/api/bookings/:id', protect, adminCheck, async(req, res)=>{
+//protect, adminCheck, async
+app.put('/api/bookings/:id', protect, async(req, res)=>{
 
     console.log('Updating Bookings...')
 
