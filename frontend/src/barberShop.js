@@ -12,7 +12,6 @@ const reducer = combineReducers({
     customerLogin:customerLoginReducer,
     customerRegister:customerRegisterReducer,
     customerDetails:customerDetailsReducer,
-
     bookingList:bookingListReducer,
     personalBookings:personalBookingsReducer,
     confirmBooking:bookingConfirmReducer,
@@ -33,7 +32,7 @@ const initialState = {
 //Handling the Middleware Usage
 const middleware = [thunk]
 
-const barberShop = createStore(
+const barberShop= createStore(
     reducer,
     initialState,
     composeWithDevTools(applyMiddleware(...middleware))

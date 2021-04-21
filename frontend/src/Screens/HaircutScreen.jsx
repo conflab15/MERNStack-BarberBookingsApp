@@ -6,8 +6,8 @@ import { Row, Col, Image, Card, ListGroup, ListGroupItem, Button } from 'react-b
 import { useDispatch, useSelector } from 'react-redux'
 import { haircutItemDetails } from '../actions/haircutActions'
 
-import Loader from '../components/Loader'
-
+import Loader from '../Components/Loader'
+import Message from '../Components/Message'
 const HaircutScreen = ({ match }) => {
 
     const dispatch = useDispatch()
@@ -26,7 +26,7 @@ const HaircutScreen = ({ match }) => {
             {loading ? <Loader /> : error ? (<Message variant='danger'>{error}</Message>) : (
                 <Row>
                     <Col md={6}>
-                        <Image className = 'py-2 w-100' src={haircut.imageUrl} alt={haircut.name} variant='flush' />
+                        <Image className='py-2 w-100' src={haircut.imageUrl} alt={haircut.name} variant='flush' />
                     </Col>
                     <Col md={3}>
                         <ListGroup>
@@ -52,8 +52,8 @@ const HaircutScreen = ({ match }) => {
                                 </ListGroupItem>
                                 <ListGroupItem>
                                     <Button
-                                    className='btn-block'
-                                    type='btn'
+                                        className='btn-block'
+                                        type='btn'
                                     >Book Haircut!</Button>
                                 </ListGroupItem>
                             </ListGroup>

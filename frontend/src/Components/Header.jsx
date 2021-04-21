@@ -40,7 +40,7 @@ const Header = ({match, history}) => {
 
                 </Navbar.Collapse>
             </Navbar>
-            <h1 className="py-5 mt-5">Kaye the Barber</h1>
+            <h1 className="py-5 mt-5">Kaye The Barber</h1>
         </>
     )
 }

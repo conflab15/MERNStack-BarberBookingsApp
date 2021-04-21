@@ -11,9 +11,9 @@ const HaircutsScreen = () => {
 
     const dispatch = useDispatch()
 
-    const haircutsList = useSelector(state => state.haircutsList)
-    const { loading, error, haircuts } = haircutsList
-    
+    const haircutList = useSelector(state => state.haircutList)
+    const { loading, error, haircuts } = haircutList
+
     useEffect(() => {
 
         dispatch(listHaircuts())
@@ -23,7 +23,7 @@ const HaircutsScreen = () => {
     return (
         <div>
             <h2>Haircuts</h2>
-            {loading ? (<Loader />) :  error ? (<Message variant='danger'>{error}</Message>) : (
+            {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : (
 
                 <Row>
                     {haircuts.map(haircut => (

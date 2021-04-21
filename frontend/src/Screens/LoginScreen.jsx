@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 
 import { login } from '../actions/customerActions'
 import Loader from '../Components/Loader'
+import FormContainer from '../Components/FormContainer'
 
 const LoginScreen = ({ location, history }) => {
 
@@ -19,8 +20,8 @@ const LoginScreen = ({ location, history }) => {
     const redirect = location.search ? location.search.split('=')[1] : '/'
 
     useEffect(() => {
-        if (customerInfo && !customerInfo.message){
-             history.push('/')
+        if (customerInfo && !customerInfo.message) {
+            history.push('/')
         }
     }, [history, customerInfo])
 
@@ -36,31 +37,31 @@ const LoginScreen = ({ location, history }) => {
             <Form onSubmit={submitHandler}>
                 <Form.Group controlId='email'>
                     <FormControl
-                    type='email'
-                    placeholder='Please enter your email...'
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                        type='email'
+                        placeholder='Please enter your email...'
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     ></FormControl>
                 </Form.Group>
 
-                <Form.Group controlId = 'password'>
+                <Form.Group controlId='password'>
                     <Form.Label>Password</Form.Label>
                     <FormControl
-                    type='password'
-                    placeholder='Please enter your password...'
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                        type='password'
+                        placeholder='Please enter your password...'
+                        value={password}
+                        onChange={(e) => setPassword(e.target.value)}
                     ></FormControl>
                 </Form.Group>
                 <Button
                     type='submit'
                     variant='primary'
-                    >Sign In</Button>
+                >Sign In</Button>
                 {loading && <Loader />}
             </Form>
-            <Row className = 'py-3'>
+            <Row className='py-3'>
                 <Col>
-                Are you a new customer? <Link to={redirect ? `/register?redirect=$redirect` : '/register'}>Sign up here!</Link>
+                    Are you a new customer? <Link to={redirect ? `/register?redirect=$redirect` : '/register'}>Sign up here!</Link>
                 </Col>
             </Row>
         </FormContainer>

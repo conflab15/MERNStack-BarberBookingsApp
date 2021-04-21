@@ -25,7 +25,7 @@ export const listBookings = () => async (dispatch, getState) => {
     }
 }
 
-export const personalBookingLists = () => async (dispatch, getState) => {
+export const personalBookingList = () => async (dispatch, getState) => {
     
     try {
         dispatch({type: 'PERSONAL_BOOKING_LISTS_REQUEST'})

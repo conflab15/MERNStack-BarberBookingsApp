@@ -5,7 +5,7 @@ import Review from '../Components/Review'
 
 const ReviewScreen = () => {
 
-    const [reviews, setReviews] = useState({})
+    const [reviews, setReviews] = useState([])
 
     useEffect(() => {
         console.log("Fetching Reviews Actioned!")

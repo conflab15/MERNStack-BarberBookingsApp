@@ -1,13 +1,12 @@
 import React from 'react'
 import { Container, Card } from 'react-bootstrap'
-import { Star } from './Star'
+import Star from './Star'
 
 const Review = ({ review }) => {
 
     let items = []
 
-    for (let i = 0; i < review.star_rating; i++)
-    {
+    for (let i = 0; i < review.star_rating; i++) {
         items.push(<Star />)
     }
 

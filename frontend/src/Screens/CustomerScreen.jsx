@@ -1,13 +1,13 @@
-import React from 'react'
+
 import React, { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { Form, Button, Row, Col, FormControl, Container, Table } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Components/Loader'
-import { getCustomerDetails, logout} from '../actions/customerActions'
-import { listBookings, myBookingList, confirmBooking } from '../actions/bookingActions'
+import { getCustomerDetails, logout } from '../actions/customerActions'
+import { listBookings, personalBookingList, confirmBooking } from '../actions/bookingActions'
 
-const CustomerScreen = ({history}) => {
+const CustomerScreen = ({ history }) => {
 
     const [forename, setForename] = useState('')
     const [surname, setSurname] = useState('')
@@ -26,7 +26,7 @@ const CustomerScreen = ({history}) => {
     const { loading, error, customer } = customerDetails
 
     const personalBookings = useSelector(state => state.personalBookings)
-    const { bookingLoading, bookingError, bookings} = personalBookings
+    const { bookingLoading, bookingError, bookings } = personalBookings
 
     const bookingList = useSelector(state => state.bookingList)
     const { allLoading, allError, allBookings } = bookingList
@@ -36,15 +36,14 @@ const CustomerScreen = ({history}) => {
 
     useEffect(() => {
 
-        if(!customerInfo || error) {
+        if (!customerInfo || error) {
             history.push('/login')
         }
 
         if (!customer || !customer.forename && customer.surname) {
             dispatch(getCustomerDetails('profile'))
         }
-        else 
-        {
+        else {
             setForename(customer.forename)
             setSurname(customer.surname)
             setAddressLine1(customer.AddressLine1)
@@ -54,12 +53,11 @@ const CustomerScreen = ({history}) => {
             setEmail(customer.Email)
         }
 
-        if (customer)
-        {
+        if (customer) {
             dispatch(personalBookingList())
         }
 
-        if (success){
+        if (success) {
             dispatch(listBookings())
         }
     }, [dispatch, history, success])
@@ -75,7 +73,7 @@ const CustomerScreen = ({history}) => {
                 {loading && <Loader />}
                 <Row>
                     <Col>
-                    <h1>My Account</h1>
+                        <h1>My Account</h1>
                     </Col>
                 </Row>
                 <Row>

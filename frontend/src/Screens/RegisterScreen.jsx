@@ -58,82 +58,82 @@ const RegisterScreen = ({ history }) => {
                     <Form.Group controlId='forename'>
                         <Form.Label>Forename</Form.Label>
                         <FormControl
-                        type='forename'
-                        placeholder='Enter your forename...'
-                        value={forename}
-                        onChange={(e) => setName(e.target.value)}
+                            type='forename'
+                            placeholder='Enter your forename...'
+                            value={forename}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='surname'>
                         <Form.Label>Surname</Form.Label>
                         <FormControl
-                        type='surname'
-                        placeholder='Enter your surname...'
-                        value={surname}
-                        onChange={(e) => setName(e.target.value)}
+                            type='surname'
+                            placeholder='Enter your surname...'
+                            value={surname}
+                            onChange={(e) => setSurname(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlID='addressline1'>
                         <Form.Label>Address Line 1</Form.Label>
                         <FormControl
-                        type='addressline1'
-                        placeholder='Enter the first line of your address...'
-                        value={addressline1}
-                        onChange={(e) => setName(e.target.value)}
+                            type='addressline1'
+                            placeholder='Enter the first line of your address...'
+                            value={addressline1}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='addressline2'>
                         <Form.Label>Address Line 2</Form.Label>
                         <FormControl
-                        type='addressline2'
-                        placeholder='Enter the second line of your address...'
-                        value={addressline2}
-                        onChange={(e) => setName(e.target.value)}
+                            type='addressline2'
+                            placeholder='Enter the second line of your address...'
+                            value={addressline2}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='town'>
                         <Form.Label>Town</Form.Label>
                         <FormControl
-                        type='town'
-                        placeholder='Enter the town of your address...'
-                        value={town}
-                        onChange={(e) => setName(e.target.value)}
+                            type='town'
+                            placeholder='Enter the town of your address...'
+                            value={town}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='postcode'>
                         <Form.Label>Post Code</Form.Label>
                         <FormControl
-                        type='postcode'
-                        placeholder='Enter the post code of your address...'
-                        value={postcode}
-                        onChange={(e) => setName(e.target.value)}
+                            type='postcode'
+                            placeholder='Enter the post code of your address...'
+                            value={postcode}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='email'>
                         <Form.Label>Email</Form.Label>
                         <FormControl
-                        type='email'
-                        placeholder='Enter your email address...'
-                        value={email}
-                        onChange={(e) => setName(e.target.value)}
+                            type='email'
+                            placeholder='Enter your email address...'
+                            value={email}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='password'>
                         <Form.Label>Password</Form.Label>
                         <FormControl
-                        type='password'
-                        placeholder='Enter your password...'
-                        value={password}
-                        onChange={(e) => setName(e.target.value)}
+                            type='password'
+                            placeholder='Enter your password...'
+                            value={password}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='confirmPassword'>
                         <Form.Label>Confirm Password</Form.Label>
                         <FormControl
-                        type='confirmPassword'
-                        placeholder='Enter your password again...'
-                        value={confirmPassword}
-                        onChange={(e) => setName(e.target.value)}
+                            type='confirmPassword'
+                            placeholder='Enter your password again...'
+                            value={confirmPassword}
+                            onChange={(e) => setForename(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Button
