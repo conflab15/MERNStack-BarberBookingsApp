@@ -35,6 +35,7 @@ export const customerRegisterReducer = (state = {}, action)=>{
     switch(action.type){
        case 'CUSTOMER_REGISTER_REQUEST':
            return {loading:true}
+           //Loeder is true when requesting to register user...
        case 'CUSTOMER_REGISTER_SUCCESS':
            return {loading:false, customerInfo: action.payload}
        case 'CUSTOMER_REGISTER_FAIL':

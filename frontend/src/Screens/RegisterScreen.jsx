@@ -42,7 +42,7 @@ const RegisterScreen = ({ history }) => {
         if (password !== confirmPassword) {
             setMessage('Error: Passwords do not match!')
         } else {
-            dispatch(register(forename, surname, addressline1, addressline2, town, postcode, email, password, confirmPassword))
+            dispatch(register(forename, surname, addressline1, addressline2, town, postcode, email, password))
         }
 
     }
@@ -79,7 +79,7 @@ const RegisterScreen = ({ history }) => {
                             type='addressline1'
                             placeholder='Enter the first line of your address...'
                             value={addressline1}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setAddressLine1(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='addressline2'>
@@ -88,7 +88,7 @@ const RegisterScreen = ({ history }) => {
                             type='addressline2'
                             placeholder='Enter the second line of your address...'
                             value={addressline2}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setAddressLine2(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='town'>
@@ -97,7 +97,7 @@ const RegisterScreen = ({ history }) => {
                             type='town'
                             placeholder='Enter the town of your address...'
                             value={town}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setTown(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='postcode'>
@@ -106,7 +106,7 @@ const RegisterScreen = ({ history }) => {
                             type='postcode'
                             placeholder='Enter the post code of your address...'
                             value={postcode}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setPostcode(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='email'>
@@ -115,7 +115,7 @@ const RegisterScreen = ({ history }) => {
                             type='email'
                             placeholder='Enter your email address...'
                             value={email}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setEmail(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='password'>
@@ -124,16 +124,16 @@ const RegisterScreen = ({ history }) => {
                             type='password'
                             placeholder='Enter your password...'
                             value={password}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setPassword(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='confirmPassword'>
                         <Form.Label>Confirm Password</Form.Label>
                         <FormControl
-                            type='confirmPassword'
+                            type='password'
                             placeholder='Enter your password again...'
                             value={confirmPassword}
-                            onChange={(e) => setForename(e.target.value)}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Button

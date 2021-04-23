@@ -16,7 +16,7 @@ const createToken = require('./utils/generateToken')
 dotenv.config()
 connectDB()
 
-app.use(express.json)
+app.use(express.json())
 
 //database models
 const Booking = require('./models/BookingModel')
@@ -24,12 +24,12 @@ const Booking = require('./models/BookingModel')
 const Customer = require('./models/CustomerModel')
 const Haircut = require('./models/HaircutModel')
 const Review = require('./models/ReviewModel')
-const { default: customerEvent } = require('@testing-library/react')
+//const { default: customerEvent } = require('@testing-library/react')
 
 const PORT = process.env.PORT || 5000
 
 app.listen(PORT, (req, res) => {
-    console.log('Server Active on port 5000...');
+    console.log(`API listening on port: ${PORT} in ${process.env.NODE_ENV} mode...`);
 })
 
 app.get('/', (req, res)=>{
@@ -208,7 +208,7 @@ app.post('/api/customers/login', async(req, res) => {
 //Customer Register Route
 app.post('/api/customers/', async (req, res) => {
 
-    const {forename, surname, addressline1, addressline2, town, postcode, email, telephone} = req.body
+    const {forename, surname, addressline1, addressline2, town, postcode, email, telephone, password} = req.body
 
     const customerExists = await Customer.findOne({email})
 
