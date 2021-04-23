@@ -31,6 +31,9 @@ const Header = ({match, history}) => {
                     <LinkContainer to='/reviews'>
                         <Nav.Link className='nav-item' >Reviews</Nav.Link>
                     </LinkContainer>
+                    <LinkContainer to='/makebooking'>
+                        <Nav.Link className='nav-item'>Make a Booking!</Nav.Link>
+                    </LinkContainer>
                     <LinkContainer to='/login'>
                         <Nav.Link className='nav-item'>My Account</Nav.Link>
                     </LinkContainer>

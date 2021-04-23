@@ -15,6 +15,7 @@ import ReviewScreen from './Screens/ReviewScreen'
 import LoginScreen from './Screens/LoginScreen'
 import RegisterScreen from './Screens/RegisterScreen'
 import CustomerScreen from './Screens/CustomerScreen'
+import BookingScreen from './Screens/BookingScreen'
 
 function App() {
   return (
@@ -32,6 +33,8 @@ function App() {
         <Route path='/register' component={RegisterScreen} exact/>
 
         <Route path='/account' component={CustomerScreen} exact/>
+
+        <Route path='/makebooking' component={BookingScreen} exact/>
 
         
       </Container>
