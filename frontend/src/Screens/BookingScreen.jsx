@@ -43,8 +43,9 @@ const BookingScreen = () => {
 
             <FormContainer>
                 <Form.Group controlId='name'>
-                    <Form.Label>Name</Form.Label>
+                    <Form.Label className='large'>Name</Form.Label>
                     <FormControl
+                        size='lg'
                         type='name'
                         placeholder='Enter name...'
                         value={name}
@@ -52,17 +53,19 @@ const BookingScreen = () => {
                     ></FormControl>
                 </Form.Group>
                 <Form.Group controlId='style'>
-                    <Form.Label>Style</Form.Label>
+                    <Form.Label className='large'>Style</Form.Label>
                     <FormControl
+                        size='lg'
                         type='style'
                         placeholder='Enter Style...'
                         value={style}
                         onChange={(e) => setStyle(e.target.value)}
                     ></FormControl>
                 </Form.Group>
-                <Form.Group controlId='price'>
-                    <Form.Label>Booking Price: £</Form.Label>
+                <Form.Group controlId='price' className='pb-1'>
+                    <Form.Label className='large'>Booking Price: £</Form.Label>
                     <FormControl
+                        size='lg'
                         type='disabled'
                         placeholder={price}
                         value={price}
@@ -71,16 +74,16 @@ const BookingScreen = () => {
                 </Form.Group>
 
                 <DatePicker
-                    className="w-100 py-3"
+                    className="w-100 py-3 pb-2"
                     value={value}
                     onChange={onChange}
                     minDate={new Date()}
                 />
 
-                <Table striped bordered hover responsive className="table-sm">
+                <Table striped bordered hover responsive className="table-sm pt-2">
                     <thead>
                         <tr>
-                            <th>Available Time Slots:</th>
+                            <th className='large'>Available Time Slots:</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -97,7 +100,8 @@ const BookingScreen = () => {
                 </Table>
 
                 <Button
-                variant='warning'
+                size='lg'
+                variant='success'
                 className='btn btn-block my-4 rounded'
                 onClick={submitHandler}
                 >

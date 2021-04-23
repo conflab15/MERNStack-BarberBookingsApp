@@ -36,3 +36,9 @@
     transform: rotate(360deg);
   }
 }
+
+/* Custom CSS */
+
+.large {
+  font-size: 1.5rem;
+}

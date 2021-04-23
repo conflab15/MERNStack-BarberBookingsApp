@@ -4,6 +4,7 @@ import {composeWithDevTools} from 'redux-devtools-extension'
 import { haircutListReducer, haircutDetailsReducer } from './reducers/haircutReducers'
 import {customerLoginReducer, customerDetailsReducer, customerRegisterReducer} from './reducers/customerReducers'
 import { bookingByDayReducer, bookingConfirmReducer, bookingListReducer, createBookingReducer, personalBookingsReducer } from './reducers/bookingReducers'
+import { reviewListReducer } from './reducers/reviewReducers'
 
 //Use Reducers
 const reducer = combineReducers({
@@ -16,7 +17,8 @@ const reducer = combineReducers({
     personalBookings:personalBookingsReducer,
     confirmBooking:bookingConfirmReducer,
     existingDayBooking:bookingByDayReducer,
-    createBooking:createBookingReducer
+    createBooking:createBookingReducer,
+    reviewList:reviewListReducer
 })
 
 //Setting the initial state to empty

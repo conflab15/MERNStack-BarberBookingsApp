@@ -1,25 +1,32 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap'
-import axios from 'axios'
 import Review from '../Components/Review'
+
+import { useDispatch, useSelector } from 'react-redux'
+import { listReviews } from '../actions/reviewActions'
+
+import Loader from '../Components/Loader'
+import Message from '../Components/Message'
 
 const ReviewScreen = () => {
 
-    const [reviews, setReviews] = useState([])
+    const dispatch = useDispatch()
+
+    const reviewList = useSelector(state => state.reviewList)
+    const { loading, error, reviews } = reviewList
 
     useEffect(() => {
-        console.log("Fetching Reviews Actioned!")
-        const FetchReviews = async () => {
-            const { data } = await axios.get('/api/reviews')
 
-            setReviews(data)
-        }
-        FetchReviews()
-    }, [])
+        dispatch(listReviews())
+
+    }, [dispatch])
 
     return (
         <div>
             <h2>Reviews of Kaye the Barber</h2>
+
+            {loading ? (<Loader/>) : error ? (<Message variant='danger'>{error}</Message>) : (
+
             <Row>
                 {reviews.map(review => (
                     <Col sm={12} md={6} lg={4}>
@@ -27,6 +34,8 @@ const ReviewScreen = () => {
                     </Col>
                 ))}
             </Row>
+
+            )}
         </div>
     )
 }
