@@ -196,7 +196,7 @@ app.post('/api/customers/login', async(req, res) => {
             town: customer.town,
             postcode: customer.postcode,
             email: customer.email,
-            telephone: customer.telephone,
+            mobile: customer.mobile,
             token: createToken(customer._id)
         })
     }
@@ -209,7 +209,7 @@ app.post('/api/customers/login', async(req, res) => {
 //Customer Register Route
 app.post('/api/customers/', async (req, res) => {
 
-    const {forename, surname, addressline1, addressline2, town, postcode, email, telephone, password} = req.body
+    const {forename, surname, addressline1, addressline2, town, postcode, email, mobile, password} = req.body
 
     const customerExists = await Customer.findOne({email})
 
@@ -226,7 +226,7 @@ app.post('/api/customers/', async (req, res) => {
         town,
         postcode,
         email, 
-        telephone,
+        mobile,
         password
     })
 
@@ -240,7 +240,7 @@ app.post('/api/customers/', async (req, res) => {
             town: customer.town,
             postcode: customer.postcode,
             email: customer.email,
-            telephone: customer.telephone,
+            mobile: customer.mobile,
             token: createToken(customer._id)
         })
     }
@@ -265,7 +265,7 @@ app.get('/api/customers/profile', protect, async(req, res) => {
             town: customer.town,
             postcode: customer.postcode,
             email: customer.email,
-            telephone: customer.telephone,
+            mobile: customer.mobile,
             token: createToken(customer._id)
         })
     }

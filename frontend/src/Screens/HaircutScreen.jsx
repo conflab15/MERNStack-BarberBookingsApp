@@ -28,7 +28,7 @@ const HaircutScreen = ({ match }) => {
                     <Col md={6}>
                         <Image className='py-2 w-100' src={haircut.imageUrl} alt={haircut.name} variant='flush' />
                     </Col>
-                    <Col md={3}>
+                    <Col md={6}>
                         <ListGroup>
                             <ListGroupItem>
                                 <h2>{haircut.name}</h2>
@@ -37,27 +37,9 @@ const HaircutScreen = ({ match }) => {
                                 <h2>{haircut.price}</h2>
                             </ListGroupItem>
                             <ListGroupItem>
-                                <h2><strong>Category:</strong>{haircut.category}</h2>
+                                <h2><strong>Category: </strong>{haircut.category}</h2>
                             </ListGroupItem>
                         </ListGroup>
-                    </Col>
-                    <Col md={3}>
-                        <Card>
-                            <ListGroup>
-                                <ListGroupItem>
-                                    <Row>
-                                        <Col>Price:</Col>
-                                        <Col><strong>£{haircut.price}</strong></Col>
-                                    </Row>
-                                </ListGroupItem>
-                                <ListGroupItem>
-                                    <Button
-                                        className='btn-block'
-                                        type='btn'
-                                    >Book Haircut!</Button>
-                                </ListGroupItem>
-                            </ListGroup>
-                        </Card>
                     </Col>
                 </Row>
             )}

@@ -58,6 +58,15 @@
   font-family: 'New Tegomin', serif;
 }
 
+#haircutCard {
+  background-color: #282c34;
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+  padding: 5px;
+  margin: 3px;
+}
+
 #landingImg {
   height: 500%;
 }
@@ -71,4 +80,17 @@
   align-items: center;
   text-align: center;
   background-color:#23272B;
+}
+
+.link {
+  color: white;
+}
+
+.link:hover {
+  color: white;
+}
+
+.review-stars{
+  display:inline-block;
+  padding:2%;
 }

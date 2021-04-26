@@ -19,6 +19,7 @@ const RegisterScreen = ({ history }) => {
     const [town, setTown] = useState('')
     const [postcode, setPostcode] = useState('')
     const [email, setEmail] = useState('')
+    const [mobile, setMobile] = useState('')
 
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
@@ -42,7 +43,7 @@ const RegisterScreen = ({ history }) => {
         if (password !== confirmPassword) {
             setMessage('Error: Passwords do not match!')
         } else {
-            dispatch(register(forename, surname, addressline1, addressline2, town, postcode, email, password))
+            dispatch(register(forename, surname, addressline1, addressline2, town, postcode, email, mobile, password))
         }
 
     }
@@ -116,6 +117,15 @@ const RegisterScreen = ({ history }) => {
                             placeholder='Enter your email address...'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
+                        ></FormControl>
+                    </Form.Group>
+                    <Form.Group controlId='mobile'>
+                        <Form.Label>Mobile</Form.Label>
+                        <FormControl
+                            type='mobile'
+                            placeholder='Enter your Mobile Number...'
+                            value={mobile}
+                            onChange={(e) => setMobile(e.target.value)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='password'>

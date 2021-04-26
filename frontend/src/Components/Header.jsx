@@ -18,7 +18,7 @@ const Header = ({match, history}) => {
 
     return (
         <>
-            <Navbar bg="dark" expand="lg" variant="dark" fixed="top">
+            <Navbar bg="dark" expand="lg" variant="dark">
                 <LinkContainer to='/'>
                     <Navbar.Brand>Kaye the Barber</Navbar.Brand>
                 </LinkContainer>
@@ -44,7 +44,7 @@ const Header = ({match, history}) => {
 
                 </Navbar.Collapse>
             </Navbar>
-            <div className='pb-3'></div>
+
         </>
     )
 }

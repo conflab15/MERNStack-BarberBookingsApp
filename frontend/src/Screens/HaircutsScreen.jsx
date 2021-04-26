@@ -7,6 +7,8 @@ import { listHaircuts } from '../actions/haircutActions'
 import Message from '../Components/Message'
 import Loader from '../Components/Loader'
 
+import fade from '../images/fade.jpg'
+
 const HaircutsScreen = () => {
 
     const dispatch = useDispatch()

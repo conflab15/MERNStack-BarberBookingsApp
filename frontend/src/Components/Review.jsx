@@ -12,7 +12,7 @@ const Review = ({ review }) => {
 
     return (
         <Container className="py-3">
-            <Card className='text-center'>
+            <Card className='text-center' id='haircutCard'>
                 <Card.Header>
                     {items.map(item => (<div className="review-stars">{item}</div>))}
                 </Card.Header>
