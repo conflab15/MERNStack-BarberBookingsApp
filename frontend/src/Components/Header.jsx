@@ -1,8 +1,9 @@
 import React from 'react'
-import { Nav, Navbar, NavDropdown, Form, FormControl, Button } from 'react-bootstrap'
+import { Nav, Navbar, NavDropdown, Form, FormControl, Button, Container } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 import { logout } from '../actions/customerActions'
 import { useDispatch, useSelector } from 'react-redux'
+
 
 const Header = ({match, history}) => {
 
@@ -34,16 +35,16 @@ const Header = ({match, history}) => {
                     <LinkContainer to='/makebooking'>
                         <Nav.Link className='nav-item'>Make a Booking!</Nav.Link>
                     </LinkContainer>
-                    <LinkContainer to='/login'>
+                    <LinkContainer to='/account'>
                         <Nav.Link className='nav-item'>My Account</Nav.Link>
                     </LinkContainer>
                     </Nav>
 
-                    {customerInfo && <LinkContainer to='/'><Button className='btn btn-primary mx-3' onClick={logoutHandler}>Logout</Button></LinkContainer>}
+                    {customerInfo && <LinkContainer to='/account'><Button className='btn btn-primary mx-3' onClick={logoutHandler}>Logout</Button></LinkContainer>}
 
                 </Navbar.Collapse>
             </Navbar>
-            <h1 className="py-5 mt-5">Kaye The Barber</h1>
+            <div className='pb-3'></div>
         </>
     )
 }
