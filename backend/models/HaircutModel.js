@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const HaircutSchema = mongoose.Schema({
+const haircutSchema = mongoose.Schema({
     name:{
         type:String,
         required:true
@@ -13,7 +13,9 @@ const HaircutSchema = mongoose.Schema({
         type:String,
         required:true,
     }
+},{
+    timestamps:true
 })
 
-const Haircut = mongoose.model('Haircut', HaircutSchema)
+const Haircut = mongoose.model('Haircut', haircutSchema)
 module.exports = Haircut

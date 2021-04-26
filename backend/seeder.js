@@ -2,8 +2,9 @@ const mongoose = require('mongoose')
 const dotenv = require('dotenv')
 
 const haircuts = require('./data/haircuts')
+const customers = require('./data/customers')
+const reviews = require('./data/reviews')
 
-const Booking = require('./models/BookingModel')
 const Customer = require('./models/CustomerModel')
 const Haircut = require('./models/HaircutModel')
 const Review = require('./models/ReviewModel')
@@ -18,8 +19,12 @@ const importData = async () => {
 
     try {
         await Haircut.deleteMany()
+        await Customer.deleteMany()
+        await Review.deleteMany()
 
         await Haircut.insertMany(haircuts)
+        await Customer.insertMany(customers)
+        await Review.insertMany(reviews)
 
         console.log('Data Import Successful')
         process.exit()

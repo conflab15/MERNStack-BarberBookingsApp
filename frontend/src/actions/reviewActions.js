@@ -11,7 +11,7 @@ export const listReviews = () => async (dispatch) => {
         const {data} = await axios.get('api/reviews')
 
         //Here we are populating the response of the dispatch to a payload
-        dispatch({type: 'REVIEWS_LIST_REQUEST', payload: data})
+        dispatch({type: 'REVIEWS_LIST_SUCCESS', payload: data})
     }
     catch(error){
         //Error message if the dispatch failed

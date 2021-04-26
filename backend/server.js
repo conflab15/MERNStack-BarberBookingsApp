@@ -39,8 +39,9 @@ app.get('/', (req, res)=>{
 //Haircut Routes
 //This app.get functions gets all the availabe haircuts within the db using an await and find function, and returning as a json object...
 app.get('/api/haircuts', async (req, res) => {
-    const haircuts = await Haircut.find()
+    const haircuts = await Haircut.find({})
     res.json(haircuts)
+    //res.send("Hello")
 })
 
 //Here, we're retrieving a singular haircut object. We search for the object using the id in the parameters...

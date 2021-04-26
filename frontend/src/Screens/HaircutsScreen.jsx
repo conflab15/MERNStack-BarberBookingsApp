@@ -23,14 +23,15 @@ const HaircutsScreen = () => {
     return (
         <div>
             <h2>Haircuts</h2>
+
             {loading ? (<Loader />) : error ? (<Message variant='danger'>{error}</Message>) : (
 
                 <Row>
-                    {haircuts.map(haircut => (
+                    {haircuts.map(haircut => 
                         <Col sm={12} md={6} lg={4}>
                             <Haircut haircut={haircut} />
                         </Col>
-                    ))}
+                    )}
                 </Row>
             )}
         </div>

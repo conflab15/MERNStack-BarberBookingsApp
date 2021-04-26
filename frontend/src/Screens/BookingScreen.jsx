@@ -9,6 +9,8 @@ import "react-datepicker/dist/react-datepicker.css";
 import Message from '../Components/Message'
 import Loader from '../Components/Loader'
 
+import { bookingByDay, createNewBooking } from '../actions/bookingActions'
+
 const BookingScreen = () => {
 
     const [value, onChange] = useState(new Date())
@@ -22,9 +24,19 @@ const BookingScreen = () => {
 
     const dispatch = useDispatch()
 
+    const existingDayBooking = useSelector(state => state.existingDayBooking)
+    const {loading, allBookings } = existingDayBooking
+
     useEffect(() => {
 
-        //Login Functionality here
+        if (value){
+            let day = ("0" + value.getDate().slice(-2))
+            let month = ("0" + value.getMonth()+1).slice(-2)
+            let date = `${value.getFullYear()}-${month}-${day}`
+            
+            setbookingDate(date);
+            dispatch(bookingByDay(date))
+        }
 
     }, [dispatch])
 
@@ -80,6 +92,8 @@ const BookingScreen = () => {
                     minDate={new Date()}
                 />
 
+                {loading ? <Loader/> : (
+
                 <Table striped bordered hover responsive className="table-sm pt-2">
                     <thead>
                         <tr>
@@ -98,6 +112,8 @@ const BookingScreen = () => {
                         })}
                     </tbody>
                 </Table>
+
+                )}
 
                 <Button
                 size='lg'
