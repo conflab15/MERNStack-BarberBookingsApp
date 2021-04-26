@@ -14,15 +14,17 @@ const Review = ({ review }) => {
         <Container className="py-3">
             <Card className='text-center' id='haircutCard'>
                 <Card.Header>
-                    {items.map(item => (<div className="review-stars">{item}</div>))}
+                   <p><b>{review.author}</b> : {review.date.slice(0,10)}</p>
                 </Card.Header>
                 <Card.Body>
                     <Card.Title>{review.title}</Card.Title>
                     <Card.Text>
                         <p>{review.description}</p>
-                        <p>Created at: {review.date}</p>
                     </Card.Text>
                 </Card.Body>
+                <Card.Footer>
+                    {items.map(item => (<div className="review-stars">{item}</div>))}
+                </Card.Footer>
             </Card>
 
         </Container>

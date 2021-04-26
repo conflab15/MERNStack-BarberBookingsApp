@@ -28,6 +28,12 @@ const LandingScreen = () => {
                     </p>
                 </Jumbotron>
             </Container>
+
+            <Container id='title'>
+                <LinkContainer to='/makebooking'>
+                    <h1 className="py-5 mt-5">Make a Booking</h1>
+                </LinkContainer>
+            </Container>
         </div>
     )
 }

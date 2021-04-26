@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import { Row, Col } from 'react-bootstrap'
+import { Container, Row, Col } from 'react-bootstrap'
 import Review from '../Components/Review'
 
 import { useDispatch, useSelector } from 'react-redux'
@@ -23,7 +23,10 @@ const ReviewScreen = () => {
 
     return (
         <div>
-            <h2>Reviews of Kaye the Barber</h2>
+            <Container id='title'>
+                <h1 className="py-5 mt-5">Reviews</h1>
+            </Container>
+            
 
             {loading ? (<Loader/>) : error ? (<Message variant='danger'>{error}</Message>) : (
 
