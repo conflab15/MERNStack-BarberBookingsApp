@@ -1,3 +1,6 @@
+/* Importing fonts to use within the application */
+@import url('https://fonts.googleapis.com/css2?family=New+Tegomin&display=swap');
+
 .App {
   text-align: center;
 }
@@ -41,4 +44,31 @@
 
 .large {
   font-size: 1.5rem;
+}
+
+#title {
+  width: 90%;
+  height: 10%;
+  margin-top: 5px;
+  margin-bottom: 3%;
+  background-color: #282c34;
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+  font-family: 'New Tegomin', serif;
+}
+
+#landingImg {
+  height: 500%;
+}
+
+#white {
+  color: white;
+}
+
+#footer {
+  padding: 5px 5px 5px 5px;
+  align-items: center;
+  text-align: center;
+  background-color:#23272B;
 }

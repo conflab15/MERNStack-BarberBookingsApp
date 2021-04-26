@@ -1,28 +1,25 @@
 import React from 'react'
-import { Container, Row, Col, ListGroup } from 'react-bootstrap'
+import { Container, Row, Col, Button } from 'react-bootstrap'
 import { LinkContainer } from 'react-router-bootstrap'
 
 const Footer = () => {
     return (
-        <>
-            <Container fluid>
+        <div>
+            <Container id='footer'>
                 <Row>
                     <Col>
-                        <p className="py-3">Kaye the Barber - Copyright 2021</p>
+                        <LinkContainer to='/makebooking'>
+                            <Button variant='dark'>Make a booking!</Button>
+                        </LinkContainer>
                     </Col>
                     <Col>
-                    <ListGroup>
-                        <LinkContainer to='/haircut'>
-                            <ListGroup.Item>Haircuts</ListGroup.Item>
+                        <LinkContainer to='/account'>
+                            <Button variant='dark'>My Account</Button>
                         </LinkContainer>
-                        <LinkContainer to='/reviews'>
-                            <ListGroup.Item>Reviews</ListGroup.Item>
-                        </LinkContainer>
-                        </ListGroup>
                     </Col>
                 </Row>
             </Container>
-        </>
+        </div>
     )
 }
 
