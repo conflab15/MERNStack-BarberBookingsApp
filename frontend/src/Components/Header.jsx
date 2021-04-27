@@ -18,7 +18,7 @@ const Header = ({match, history}) => {
 
     return (
         <>
-            <Navbar bg="dark" expand="lg" variant="dark">
+            <Navbar bg="dark" expand="lg" variant="dark" id='font'>
                 <LinkContainer to='/'>
                     <Navbar.Brand>Kaye the Barber</Navbar.Brand>
                 </LinkContainer>
@@ -40,7 +40,7 @@ const Header = ({match, history}) => {
                     </LinkContainer>
                     </Nav>
 
-                    {customerInfo && <LinkContainer to='/account'><Button className='btn btn-primary mx-3' onClick={logoutHandler}>Logout</Button></LinkContainer>}
+                    {customerInfo && <LinkContainer to='/account'><Button className='btn btn-danger mx-3' onClick={logoutHandler}>Logout</Button></LinkContainer>}
 
                 </Navbar.Collapse>
             </Navbar>

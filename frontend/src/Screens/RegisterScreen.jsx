@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import FormContainer from '../Components/FormContainer'
 import { Link } from 'react-router-dom'
-import { Form, Button, Row, Col, FormControl } from 'react-bootstrap'
+import { Form, Button, Row, Col, FormControl, Container } from 'react-bootstrap'
 
 //Imports for registration functionality
 import { useDispatch, useSelector } from 'react-redux'
@@ -50,8 +50,11 @@ const RegisterScreen = ({ history }) => {
 
     return (
         <div>
-            <FormContainer>
-                <h1 className='py-3'>Register!</h1>
+            <Container id='title'>
+                <h1 className='py-5 mt-5'>Register</h1>
+            </Container>
+
+            <Container id='signInForm'>
                 {error && <Message variant='danger'>{error}</Message>}
                 {loading && <Loader />}
                 {message && <Message variant='info'>{message}</Message>}
@@ -147,6 +150,7 @@ const RegisterScreen = ({ history }) => {
                         ></FormControl>
                     </Form.Group>
                     <Button
+                        size='lg'
                         type='submit'
                         variant='primary'
                         className='btn btn-block btn-success rounded'
@@ -157,7 +161,7 @@ const RegisterScreen = ({ history }) => {
                         Have an account? <Link to="/login">Sign in!</Link>
                     </Col>
                 </Row>
-            </FormContainer>
+            </Container>
         </div>
     )
 }

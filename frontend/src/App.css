@@ -46,6 +46,10 @@
   font-size: 1.5rem;
 }
 
+#white {
+  color: white;
+}
+
 #title {
   width: 90%;
   height: 10%;
@@ -65,6 +69,18 @@
   text-align: center;
   padding: 5px;
   margin: 3px;
+  font-family: 'New Tegomin', serif;
+}
+
+#signInForm {
+  background-color: #282c34;
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+  padding: 12px;
+  margin: 5px;
+  align-items: center;  
+  font-family: 'New Tegomin', serif;
 }
 
 #landingImg {
@@ -75,11 +91,17 @@
   color: white;
 }
 
+#font {
+  font-family: 'New Tegomin', serif;
+}
+
 #footer {
-  padding: 5px 5px 5px 5px;
+  border-radius: 25px;
+  padding: 10px;
   align-items: center;
   text-align: center;
   background-color:#23272B;
+  font-family: 'New Tegomin', serif;
 }
 
 .link {

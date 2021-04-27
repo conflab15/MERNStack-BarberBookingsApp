@@ -1,13 +1,12 @@
 import React, { useEffect } from 'react'
-import FormImpl from 'react-bootstrap/esm/Form'
 import { Link } from 'react-router-dom'
-import { Row, Col, Image, Card, ListGroup, ListGroupItem, Button } from 'react-bootstrap'
-
+import { Card, Container } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { haircutItemDetails } from '../actions/haircutActions'
 
 import Loader from '../Components/Loader'
 import Message from '../Components/Message'
+
 const HaircutScreen = ({ match }) => {
 
     const dispatch = useDispatch()
@@ -20,28 +19,22 @@ const HaircutScreen = ({ match }) => {
     }, [dispatch, match])
 
     return (
-        <div>
-            <Link to='/haircut' className='btn btn-dark py-3'>Back to Haircuts</Link>
-
+        <div className='pt-3'>
+            
             {loading ? <Loader /> : error ? (<Message variant='danger'>{error}</Message>) : (
-                <Row>
-                    <Col md={6}>
-                        <Image className='py-2 w-100' src={haircut.imageUrl} alt={haircut.name} variant='flush' />
-                    </Col>
-                    <Col md={6}>
-                        <ListGroup>
-                            <ListGroupItem>
-                                <h2>{haircut.name}</h2>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <h2>{haircut.price}</h2>
-                            </ListGroupItem>
-                            <ListGroupItem>
-                                <h2><strong>Category: </strong>{haircut.category}</h2>
-                            </ListGroupItem>
-                        </ListGroup>
-                    </Col>
-                </Row>
+                <Container>
+                    <Card id='title'>
+                        <Card.Img variant='top' src={haircut.imageUrl} alt={haircut.name} />
+                        <Card.Body>
+                            <Card.Title>{haircut.name}</Card.Title>
+                            <Card.Text>
+                                <strong>Category: </strong>{haircut.category}
+                            </Card.Text>
+                            <Link to='/haircut' className='btn btn-dark py-3 rounded'>Back to Haircuts</Link>
+                        </Card.Body>
+                    </Card>
+                </Container>
+
             )}
         </div>
     )
