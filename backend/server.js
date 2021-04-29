@@ -93,9 +93,9 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
     
     console.log('Request to make booking')
 
-    const {style, bookingDate, bookingTime, price} = req.body
+    const {style, bookingTime, bookingDate, price} = req.body
 
-    const loggedIncustomer = await customer.findOne({_id:req.customer._id})
+    const loggedIncustomer = await Customer.findOne({_id:req.customer._id})
 
     console.log(loggedIncustomer)
 
@@ -106,19 +106,19 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
     const booking = await Booking.create({
         customer: loggedIncustomer,
         style,
-        price,
-        bookingDate, 
-        bookingTime
+        bookingTime,
+        bookingDate,
+        price
     })
 
     if(booking){
         res.status(201).json({
             _id: booking._id,
-            customer: booking.customer.name,
-            price: booking.price,
-            bookingDate: booking.bookingDate,
+            customer: booking.customer.forename,
+            style: booking.style, 
             bookingTime: booking.bookTime,
-            stylenpm 
+            bookingDate: booking.bookingDate,
+            price: booking.price
         })
     }
     else{

@@ -9,8 +9,9 @@ import DatePicker from 'react-datepicker'
 import "react-datepicker/dist/react-datepicker.css";
 
 import { bookingByDay, createNewBooking } from '../actions/bookingActions'
+import { logout, getCustomerDetails } from '../actions/customerActions'
 
-const BookingScreen = () => {
+const BookingScreen = ({ history }) => {
 
     const [value, onChange] = useState(new Date())
     const [style, setStyle] = useState('')
@@ -24,27 +25,48 @@ const BookingScreen = () => {
     const dispatch = useDispatch()
 
     const existingDayBooking = useSelector(state => state.existingDayBooking)
-    const {loading, error, allBookings } = existingDayBooking
+    const {loading, bookings } = existingDayBooking
+
+    const customerLogin = useSelector(state => state.customerLogin)
+    const {customerInfo} = customerLogin
+
+    const customerDetails = useSelector(state => state.customerDetails)
+    const {loading: loadingCustomer, error: errorDetails, customer} = customerDetails
 
     useEffect(() => {
 
-        if (value){
-            let day = ("0" + value.getDate()).slice(-2)
-            let month = ("0" + value.getMonth()+1).slice(-2)
-            let date = `${value.getFullYear()}-${month}-${day}`
-            
-            setbookingDate(date);
-            dispatch(bookingByDay(date))
+        //put login gubbins here
+        if (!customerInfo) { 
+            dispatch(logout())
+            history.push('/login')
         }
 
-    }, [dispatch])
+        if(!customer || !customer.forename) {
+            dispatch(getCustomerDetails('profile'))
+        }
+        else {
+            setName(customer.forename + ' ' + customer.surname)
+        }
+
+
+        if (value) {
+            let day = ("0" + value.getDate()).slice(-2)
+            let month = ("0" + (value.getMonth() + 1)).slice(-2)
+            let date = `${value.getFullYear()}-${month}-${day}`
+
+            setbookingDate(date)
+            dispatch(bookingByDay(date))
+        }
+    }, [dispatch, value, customer, customerInfo, history])
+
 
     const submitHandler = () => {
         
         setbookingDate(value)
-        console.log(name, price, bookingTime, bookingDate, style)
+        console.log(name, style, bookingTime, bookingDate, price)
 
         //Dispatch here!
+        dispatch(createNewBooking(style, bookingTime, bookingDate, price))
 
     }
 
@@ -61,9 +83,10 @@ const BookingScreen = () => {
                         <FormControl
                             size='lg'
                             type='name'
+                            disabled
                             placeholder='Enter name...'
                             value={name}
-                            onChange={(e) => setName(e.target.value)}
+                            onChange={(e) => setName(name)}
                         ></FormControl>
                     </Form.Group>
                     <Form.Group controlId='style'>
@@ -95,14 +118,17 @@ const BookingScreen = () => {
                         minDate={new Date()}
                     />
 
+                    {loading ? <Loader /> : (
+
                     <Table striped bordered hover responsive className="table-sm">
                         <thead>
                             <tr>
                                 <th className='large' id='white'>Available Time Slots:</th>
                             </tr>
                         </thead>
+                        {bookings && 
                         <tbody>
-                            {allBookings.map((time) => {
+                            {bookings.map((time) => (
                                 <tr key={time}>
                                     <td><Button 
                                     variant='success'
@@ -113,10 +139,11 @@ const BookingScreen = () => {
                                     </Button>
                                     </td>
                                 </tr>
-                            })}
+                            ))}
                         </tbody>
+                        }
                     </Table>
-
+                    )}
                     <Button
                     size='lg'
                     variant='success'
