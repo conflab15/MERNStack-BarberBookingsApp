@@ -35,7 +35,7 @@ const CustomerScreen = ({ history }) => {
 
     //ADMIN useState : Gets ALL BOOKINGS from the db
     const bookingList = useSelector(state => state.bookingList)
-    const { allLoading, allError, allBookings } = bookingList
+    const { allLoading, allError, allbookings } = bookingList
 
     //ADMIN useState : Allows Admins to confirm a booking....
     const confirmNewBooking = useSelector(state => state.confirmBooking)
@@ -51,14 +51,14 @@ const CustomerScreen = ({ history }) => {
             history.push('/login')
         }
 
-        if (!customer || !customer.forename && customer.surname) {
+        if (!customer || !customer.forename) {
             dispatch(getCustomerDetails('profile'))
         }
         else {
             setForename(customer.forename)
             setSurname(customer.surname)
-            setAddressLine1(customer.addressLine1)
-            setAddressLine2(customer.addressLine2)
+            setAddressLine1(customer.addressline1)
+            setAddressLine2(customer.addressline2)
             setTown(customer.town)
             setPostcode(customer.postcode)
             setEmail(customer.email)
@@ -68,6 +68,7 @@ const CustomerScreen = ({ history }) => {
 
         if (customer) {
             if(customer.isAdmin) {
+                dispatch(getCustomerDetails('profile'))
                 dispatch(listBookings())
                 setAdmin(true)
             }
@@ -113,7 +114,8 @@ const CustomerScreen = ({ history }) => {
                 <Row>
                     <Col id="title">
                         <p><b>Customer: </b>{forename} {surname}</p>
-                        <p><b>Address: </b>{addressline1}</p>
+                        <p><b>Address: </b></p>
+                        <p>{addressline1}</p>
                         <p>{addressline2}</p>
                         <p>{town}</p>
                         <p>{postcode}</p>
@@ -185,9 +187,9 @@ const CustomerScreen = ({ history }) => {
                                 <th>Complete?</th>
                             </tr>
                         </thead>
-                        {allBookings && 
+                        {allbookings && 
                         <tbody>
-                            {allBookings.map((booking) => (
+                            {allbookings.map((booking) => (
                                 <tr key={booking._id}>
                                     <td>{booking._id.slice(-5)}</td>
                                     <td>{booking.bookingDate}</td>

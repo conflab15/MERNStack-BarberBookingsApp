@@ -118,7 +118,7 @@ export const completeBooking = (booking) => async (dispatch, getState) => {
             }
         }
 
-        const {data} = await axios.put(`/api/bookings/confirm/${booking._id}`, {booking}, config)
+        const {data} = await axios.put(`/api/bookings/complete/${booking._id}`, {booking}, config)
 
         dispatch({type: 'COMPLETE_BOOKING_SUCCESS', payload: data})
     }

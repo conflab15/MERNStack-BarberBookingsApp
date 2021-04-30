@@ -177,7 +177,7 @@ app.put('/api/bookings/:id', protect, async(req, res)=>{
 })
 
 //Updating Bookings to confirm they have been completed for the clients records...
-app.put('/api/bookings/confirm/:id', protect, async(req, res) => {
+app.put('/api/bookings/complete/:id', protect, async(req, res) => {
 
     console.log('Completing Bookings..')
 
@@ -193,6 +193,7 @@ app.put('/api/bookings/confirm/:id', protect, async(req, res) => {
         throw new Error("We couldn't find this booking!")
     }
 })
+
 
 
 //Customer Routes -------------------------------------------------------
