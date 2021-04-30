@@ -28,7 +28,7 @@ export const listBookings = () => async (dispatch, getState) => {
 export const personalBookingList = () => async (dispatch, getState) => {
     
     try {
-        dispatch({type: 'PERSONAL_BOOKING_LISTS_REQUEST'})
+        dispatch({type: 'PERSONAL_BOOKING_LIST_REQUEST'})
 
         const {customerLogin: {customerInfo}} = getState()
 
@@ -40,7 +40,7 @@ export const personalBookingList = () => async (dispatch, getState) => {
 
         const {data} = await axios.get('/api/bookings/personalbookings', config)
 
-        dispatch({type: 'PERSONAL_BOOKING_LISTS_SUCCESS', payload: data})
+        dispatch({type: 'PERSONAL_BOOKING_LIST_SUCCESS', payload: data})
     }
     catch(error){
         //Pass an error message to the state
@@ -103,6 +103,32 @@ export const confirmBooking = (booking) => async (dispatch, getState) =>{
             payload: error.message
         })
     }
+}
+
+export const completeBooking = (booking) => async (dispatch, getState) => {
+
+    try {
+        dispatch({type: 'COMPLETE_BOOKING_REQUEST'})
+
+        const {customerLogin:{customerInfo}} = getState()
+
+        const config = {
+            headers:{
+                Authorization: customerInfo.token
+            }
+        }
+
+        const {data} = await axios.put(`/api/bookings/confirm/${booking._id}`, {booking}, config)
+
+        dispatch({type: 'COMPLETE_BOOKING_SUCCESS', payload: data})
+    }
+    catch(error){
+        dispatch({
+            type: 'COMPLETE_BOOKING_FAIL',
+            payload: error.message
+        })
+    }
+
 }
 
 export const bookingByDay = (date) => async (dispatch, getState) =>{

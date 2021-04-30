@@ -36,7 +36,7 @@ app.get('/', (req, res)=>{
     res.send('Api is active...')
 })
 
-//Haircut Routes
+//Haircut Routes -------------------------------------------------------
 //This app.get functions gets all the availabe haircuts within the db using an await and find function, and returning as a json object...
 app.get('/api/haircuts', async (req, res) => {
     const haircuts = await Haircut.find({})
@@ -61,14 +61,14 @@ app.get('/api/haircuts/:id', async (req, res) => {
     }
 })
 
-//Review Routes
+//Review Routes -------------------------------------------------------
 //Because we aren't fetching specific reviews, just collecting all of them and displaying will be enough for the application... 
 app.get('/api/reviews', async (req,res) => {
     const reviews = await Review.find({})
     res.json(reviews)
 })
 
-//Booking Routes
+//Booking Routes -------------------------------------------------------
 //Finding a specific booking for the current customer... 
 app.get('/api/bookings/day/:id', async(req, res)=>{
 
@@ -145,7 +145,7 @@ app.get('/api/bookings/personalbookings', protect, async(req, res)=>{
     }
 })
 
-//ADMINISTRATOR ROUTES
+//ADMINISTRATOR ROUTES -------------------------------------------------------
 //Finding all bookings for the customer...
 app.get('/api/bookings', protect, async(req, res)=>{
 
@@ -176,8 +176,26 @@ app.put('/api/bookings/:id', protect, async(req, res)=>{
 
 })
 
+//Updating Bookings to confirm they have been completed for the clients records...
+app.put('/api/bookings/confirm/:id', protect, async(req, res) => {
 
-//Customer Routes
+    console.log('Completing Bookings..')
+
+    const booking = await Booking.findById(req.params.id)
+
+    if (booking) {
+        booking.isComplete = true
+        const completedBooking = await booking.save()
+        res.json(completedBooking)
+    }
+    else {
+        res.status(404).json({message:"We couldn't find this booking!"})
+        throw new Error("We couldn't find this booking!")
+    }
+})
+
+
+//Customer Routes -------------------------------------------------------
 //Customer Login and Authorisation
 app.post('/api/customers/login', async(req, res) => {
     const {email, password} = req.body

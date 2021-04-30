@@ -3,8 +3,9 @@ import thunk from 'redux-thunk'
 import {composeWithDevTools} from 'redux-devtools-extension'
 import { haircutListReducer, haircutDetailsReducer } from './reducers/haircutReducers'
 import {customerLoginReducer, customerDetailsReducer, customerRegisterReducer} from './reducers/customerReducers'
-import { bookingByDayReducer, bookingConfirmReducer, bookingListReducer, createBookingReducer, personalBookingsReducer } from './reducers/bookingReducers'
+import { bookingByDayReducer, bookingConfirmReducer, bookingCompleteReducer, bookingListReducer, createBookingReducer, personalBookingsReducer } from './reducers/bookingReducers'
 import { reviewListReducer } from './reducers/reviewReducers'
+//import { completeBooking } from './actions/bookingActions'
 
 //Use Reducers
 const reducer = combineReducers({
@@ -18,6 +19,7 @@ const reducer = combineReducers({
     confirmBooking:bookingConfirmReducer,
     existingDayBooking:bookingByDayReducer,
     createBooking:createBookingReducer,
+    completeBooking: bookingCompleteReducer,
     reviewList:reviewListReducer
 })
 

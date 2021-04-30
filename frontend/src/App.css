@@ -62,6 +62,16 @@
   font-family: 'New Tegomin', serif;
 }
 
+#bookingTable {
+  margin-top: 5px;
+  margin-bottom: 3%;
+  background-color: #282c34;
+  color: white;
+  border-radius: 25px;
+  text-align: center;
+  font-family: 'New Tegomin', serif;
+}
+
 #haircutCard {
   background-color: #282c34;
   color: white;

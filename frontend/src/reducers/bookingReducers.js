@@ -58,13 +58,29 @@ export const bookingByDayReducer = (state = {bookings: []}, action) =>{
 export const bookingConfirmReducer = (state = {}, action) =>{
 
     switch(action.type){
-        case 'CREATE_BOOKING_REQUEST':
+        case 'CONFIRM_BOOKING_REQUEST':
             return {loading:true}
-        case 'CREATE_BOOKING_SUCCESS':
+        case 'CONFIRM_BOOKING_SUCCESS':
             return {loading:false, success:true}
-        case 'CREATE_BOOKING_FAIL':
+        case 'CONFIRM_BOOKING_FAIL':
             return {loading: false, error: action.payload}
-        case 'CREATE_BOOKING_RESET':
+        case 'CONFIRM_BOOKING_RESET':
+            return {}
+        default:
+            return state
+    }
+}
+
+export const bookingCompleteReducer = (state = {}, action) => {
+
+    switch(action.type){
+        case 'COMPLETE_BOOKING_REQUEST':
+            return {loading: true}
+        case 'COMPLETE_BOOKING_SUCCESS':
+            return {loading: false, complete:true}
+        case 'COMPLETE_BOOKING_FAIL':
+            return {loading: false, error: action.payload}
+        case 'COMPLETE_BOOKING_RESET':
             return {}
         default:
             return state
