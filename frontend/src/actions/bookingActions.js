@@ -8,10 +8,10 @@ export const listBookings = () => async (dispatch, getState) => {
         const {customerLogin: {customerInfo}} = getState()
 
         const config = {
-            headers:{
-                Authorization: customerInfo.token
+                headers:{
+                    Authorization: customerInfo.token
+                }
             }
-        }
 
         const {data} = await axios.get('/api/bookings', config)
 

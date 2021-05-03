@@ -29,6 +29,8 @@ const CustomerScreen = ({ history }) => {
     const customerDetails = useSelector(state => state.customerDetails)
     const { loading, error, customer } = customerDetails
 
+    //--------------------------------------------------------------------
+
     //Get the Customers Bookings from useState
     const personalBookings = useSelector(state => state.personalBookings)
     const { bookingLoading, bookingError, bookings } = personalBookings
@@ -37,6 +39,8 @@ const CustomerScreen = ({ history }) => {
     const bookingList = useSelector(state => state.bookingList)
     const { allLoading, allError, allbookings } = bookingList
 
+    //--------------------------------------------------------------------
+    
     //ADMIN useState : Allows Admins to confirm a booking....
     const confirmNewBooking = useSelector(state => state.confirmBooking)
     const { success } = confirmNewBooking
@@ -45,9 +49,18 @@ const CustomerScreen = ({ history }) => {
     const completeNewBooking = useSelector(state => state.completeBooking)
     const { complete } = completeNewBooking
 
+
+    const logoutHandler = () => {
+        dispatch(logout())
+    }
+
     useEffect(() => {
 
+        //console.log("start of useEffect")
+        //console.log(customer.isAdmin)
+
         if (!customerInfo || error) {
+            //dispatch(logout())
             history.push('/login')
         }
 
@@ -64,18 +77,31 @@ const CustomerScreen = ({ history }) => {
             setEmail(customer.email)
             setMobile(customer.mobile)
             setAdmin(customer.isAdmin)
+            console.log(customer.isAdmin) //Testing purposes to see the isAdmin value...
         }
 
         if (customer) {
+            console.log('Customer recognised')
+            dispatch(getCustomerDetails('profile'))
+
+            console.log(customer.isAdmin)
+
+            //customer.isAdmin = true
+            //if the customer isAdmin is TRUE 
             if(customer.isAdmin) {
-                dispatch(getCustomerDetails('profile'))
-                dispatch(listBookings())
+                console.log(customer.isAdmin)
+                console.log('isAdmin TRUE HAS RAN')
+                
                 setAdmin(true)
+                dispatch(listBookings()) //RUN THE GET ALL BOOKINGS REDUCER/STATE
+                
             }
             else {
-                dispatch(getCustomerDetails('profile'))
-                dispatch(personalBookingList())
-                setAdmin(customer.isAdmin)
+                console.log(customer.isAdmin)
+                console.log('isAdmin FALSE HAS RAN')
+                //dispatch(getCustomerDetails('profile'))
+                dispatch(personalBookingList()) //RUN THE PERSONAL BOOKING LIST REDUCER/STATE
+                //setAdmin(customer.isAdmin) //SET TO THE CUSTOMER RECORD DEFAULT (FALSE)
             }
         }
 
@@ -87,17 +113,18 @@ const CustomerScreen = ({ history }) => {
             dispatch(listBookings())
         }
 
-    }, [dispatch, history, success, complete])
+    }, [dispatch, history, success, complete, isAdmin])
 
     //ADMIN USE: confirms the booking by changing it's boolean value through a reducer...
     const ConfirmBooking = (booking) => {
         console.log(booking)
         dispatch(confirmBooking(booking))
+        dispatch(listBookings())
     }
 
     const CompleteBooking = (booking) => {
-        console.log(booking)
         dispatch(completeBooking(booking))
+        dispatch(listBookings())
     }
 
     return (
@@ -125,7 +152,53 @@ const CustomerScreen = ({ history }) => {
                 </Row>
             </Container>
 
-            {!isAdmin ? (
+            {isAdmin ? (
+
+                <Container>
+                <h1>ADMIN DASHBOARD: ALL BOOKINGS</h1>
+                {allLoading && <Loader />}
+                {allError && <Message variant="danger">{allError}</Message>}
+
+                <Table striped borderd hover responsive className="table-sm">
+                    <thead>
+                        <tr>
+                            <th>Booking Ref</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th>Style</th>
+                            <th>Price</th>
+                            <th>Confirmed</th>
+                            <th>Paid</th>
+                            <th>Complete</th>
+                            <th>Confirm?</th>
+                            <th>Paid?</th>
+                            <th>Complete?</th>
+                        </tr>
+                    </thead>
+                    {allbookings && 
+                    <tbody>
+                        {allbookings.map((booking) => (
+                            <tr key={booking._id}>
+                                <td>{booking._id.slice(-5)}</td>
+                                <td>{booking.bookingDate}</td>
+                                <td>{booking.bookingTime}</td>
+                                <td>{booking.style}</td>
+                                <td>{booking.price}</td>
+                                <td>{booking.isConfirmed ? <p>YES</p> : <p>NO</p>}</td>
+                                <td>{booking.isPaid ? <p>YES</p> : <p>NO</p>}</td>
+                                <td>{booking.isComplete ? <p>YES</p> : <p>NO</p>}</td>
+                                <td><Button onClick={() => ConfirmBooking(booking)} className="btn btn-block btn-success">Confirm?</Button></td>
+                                <td><Button onClick="" className="btn btn-block btn-primary">Paid?</Button></td>
+                                <td><Button onClick={() => CompleteBooking(booking)} className="btn btn-block btn-danger">Complete?</Button></td>
+                            </tr>
+                        ))}
+                    </tbody>
+                    }
+                </Table>
+            </Container>
+                
+            ) : (
+
                 <Container>
                     <Container id="title">
                         <h1 className="py-5 mt-5">My Bookings</h1>
@@ -159,49 +232,6 @@ const CustomerScreen = ({ history }) => {
                                     <td>{booking.isConfirmed ? <p>YES</p> : <p>NO</p>}</td>
                                     <td>{booking.isPaid ? <p>YES</p> : <p>NO</p>}</td>
                                     <td>{booking.isComplete ? <p>YES</p> : <p>NO</p>}</td>
-                                </tr>
-                            ))}
-                        </tbody>
-                        }
-                    </Table>
-                </Container>
-            ) : (
-                <Container>
-                    <h1>ADMIN DASHBOARD: ALL BOOKINGS</h1>
-                    {allLoading && <Loader />}
-                    {allError && <Message variant="danger">{allError}</Message>}
-
-                    <Table striped borderd hover responsive className="table-sm">
-                        <thead>
-                            <tr>
-                                <th>Booking Ref</th>
-                                <th>Date</th>
-                                <th>Time</th>
-                                <th>Style</th>
-                                <th>Price</th>
-                                <th>Confirmed</th>
-                                <th>Paid</th>
-                                <th>Complete</th>
-                                <th>Confirm?</th>
-                                <th>Paid?</th>
-                                <th>Complete?</th>
-                            </tr>
-                        </thead>
-                        {allbookings && 
-                        <tbody>
-                            {allbookings.map((booking) => (
-                                <tr key={booking._id}>
-                                    <td>{booking._id.slice(-5)}</td>
-                                    <td>{booking.bookingDate}</td>
-                                    <td>{booking.bookingTime}</td>
-                                    <td>{booking.style}</td>
-                                    <td>{booking.price}</td>
-                                    <td>{booking.isConfirmed ? <p>YES</p> : <p>NO</p>}</td>
-                                    <td>{booking.isPaid ? <p>YES</p> : <p>NO</p>}</td>
-                                    <td>{booking.isComplete ? <p>YES</p> : <p>NO</p>}</td>
-                                    <td><Button onClick={() => ConfirmBooking(booking)} className="btn btn-block btn-success">Confirm?</Button></td>
-                                    <td><Button onClick="" className="btn btn-block btn-primary">Paid?</Button></td>
-                                    <td><Button onClick={() => CompleteBooking(booking)} className="btn btn-block btn-danger">Complete?</Button></td>
                                 </tr>
                             ))}
                         </tbody>

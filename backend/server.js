@@ -20,11 +20,9 @@ app.use(express.json())
 
 //database models
 const Booking = require('./models/BookingModel')
-//const Category = require('./models/CategoryModel')
 const Customer = require('./models/CustomerModel')
 const Haircut = require('./models/HaircutModel')
 const Review = require('./models/ReviewModel')
-//const { default: customerEvent } = require('@testing-library/react')
 
 const PORT = process.env.PORT || 5000
 
