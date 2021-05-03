@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import Loader from '../Components/Loader'
 import Message from '../Components/Message'
 import { getCustomerDetails, customerLogin, logout } from '../actions/customerActions'
-import { listBookings, personalBookingList, confirmBooking, completeBooking } from '../actions/bookingActions'
+import { listBookings, personalBookingList, confirmBooking, completeBooking, deleteBooking } from '../actions/bookingActions'
 
 const CustomerScreen = ({ history }) => {
 
@@ -48,6 +48,9 @@ const CustomerScreen = ({ history }) => {
     //ADMIN useState : Allows Admins to complete a booking....
     const completeNewBooking = useSelector(state => state.completeBooking)
     const { complete } = completeNewBooking
+
+    const deleteThisBooking = useSelector(state => state.deleteBooking)
+    const { deleteLoader, deleteError, deleted } = deleteThisBooking
 
 
     const logoutHandler = () => {
@@ -113,7 +116,7 @@ const CustomerScreen = ({ history }) => {
             dispatch(listBookings())
         }
 
-    }, [dispatch, history, success, complete, isAdmin])
+    }, [dispatch, history, success, complete, isAdmin, deleted])
 
     //ADMIN USE: confirms the booking by changing it's boolean value through a reducer...
     const ConfirmBooking = (booking) => {
@@ -126,6 +129,14 @@ const CustomerScreen = ({ history }) => {
         dispatch(completeBooking(booking))
         dispatch(listBookings())
     }
+
+    const DeleteABooking = (bookingId) => { 
+        dispatch(deleteBooking(bookingId))
+        console.log('deleted booking... ')
+
+        //dispatch(personalBookingList())
+    }
+
 
     return (
         <div>
@@ -207,6 +218,9 @@ const CustomerScreen = ({ history }) => {
                     {bookingLoading && <Loader />}
                     {bookingError && <Message variant='danger'>{bookingError}</Message>}
 
+                    {deleteLoader && <Loader />}
+                    {deleteError && <Message variant="danger">{allError}</Message>}
+
                     <Table striped bordered hover responsive className='table-lg' id='bookingTable'>
                         <thead>
                             <tr>
@@ -218,6 +232,7 @@ const CustomerScreen = ({ history }) => {
                                 <th>Confirmed?</th>
                                 <th>Paid?</th>
                                 <th>Completed?</th>
+                                <th>Need to cancel?</th>
                             </tr>
                         </thead>
                         {bookings && 
@@ -232,6 +247,7 @@ const CustomerScreen = ({ history }) => {
                                     <td>{booking.isConfirmed ? <p>YES</p> : <p>NO</p>}</td>
                                     <td>{booking.isPaid ? <p>YES</p> : <p>NO</p>}</td>
                                     <td>{booking.isComplete ? <p>YES</p> : <p>NO</p>}</td>
+                                    <td><Button onClick={() => DeleteABooking(booking._id)} className="btn btn-block btn-danger">Cancel Booking</Button></td>
                                 </tr>
                             ))}
                         </tbody>

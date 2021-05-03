@@ -86,6 +86,39 @@ app.get('/api/bookings/day/:id', async(req, res)=>{
 
 })
 
+//Cancel/Delete a booking...
+app.delete('/api/booking/delete/:id', protect, async(req, res) => {
+
+    console.log('Deleting a booking...')
+
+    //Finding the booking by its ID
+    const booking = await Booking.findById(req.params.id)
+
+    //if the booking is found
+    if (booking) {
+        console.log('Booking found!')
+        console.log(booking.id)
+
+        Booking.findByIdAndDelete(booking.id, function (error) {
+            if(error) {
+                console.log(error)
+                res.json({message: 'ERROR'})
+            }
+            else {
+                console.log('Deleted Successfully')
+                res.json({message: 'Booking has been deleted!'})
+            }
+        })
+
+    }
+    else {
+        res.status(401).json({message:'Booking not found!'})
+    }
+
+})
+
+
+
 //Creating a new booking...
 app.post('/api/bookings/create', protect, async(req, res)=>{
     

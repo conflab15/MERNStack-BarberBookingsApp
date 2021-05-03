@@ -86,3 +86,21 @@ export const bookingCompleteReducer = (state = {}, action) => {
             return state
     }
 }
+
+export const bookingDeleteReducer = (state = {}, action) => {
+
+    switch(action.type){
+        case 'DELETE_BOOKING_REQUEST':
+            return {loading: true}
+        case 'DELETE_BOOKING_SUCCESS':
+            return {loading: false, deleted:true}
+        case 'DELETE_BOOKING_FAIL':
+            return {loading: false, error: action.payload}
+        case 'DELETE_BOOKING_RESET':
+            return {}
+        default:
+            return state
+    }
+
+
+}
