@@ -17,6 +17,7 @@ import RegisterScreen from './Screens/RegisterScreen'
 import CustomerScreen from './Screens/CustomerScreen'
 import BookingScreen from './Screens/BookingScreen'
 
+//The App() defines what routes to take to get to different elements of the website application, by defining a route path and a component to return...
 function App() {
   return (
     <Router>

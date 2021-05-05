@@ -22,8 +22,10 @@ const BookingScreen = ({ history }) => {
 
     //const slotTimes = ['09:00', '10:00', '11:00', '12:00', '13:00', '14:00', '15:00', '16:00', '17:00']
 
+    //Dispatch is used to action different reducers to change the application state. 
     const dispatch = useDispatch()
 
+    //useSelectors get the different payloads from the reducers and actions which are returned when they're called...
     const existingDayBooking = useSelector(state => state.existingDayBooking)
     const {loading, bookings } = existingDayBooking
 
@@ -110,6 +112,8 @@ const BookingScreen = ({ history }) => {
                             onChange={(e) => setPrice(e.target.value)}
                         ></FormControl>
                     </Form.Group>
+
+                    
 
                     <DatePicker
                         className="w-100 py-3 pb-2"

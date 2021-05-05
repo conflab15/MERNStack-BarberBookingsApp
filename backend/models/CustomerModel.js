@@ -49,6 +49,7 @@ const customerSchema = mongoose.Schema({
     timestamps:true
 })
 
+//Customer Model functions to deal with the password creation and login functionality to check if both hashed passwords match
 customerSchema.pre('save', async function(next){
     if (!this.isModified('password')){
         next()

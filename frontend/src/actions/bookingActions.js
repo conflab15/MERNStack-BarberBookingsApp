@@ -1,5 +1,8 @@
 import axios from 'axios'
 
+//Actions define how states and the API work together, and the information that needs to be passed two and from... 
+//Normally, request States are talking to and from the API, and when that call either succeeds or fails, the SUCCESS or FAIL state is returned with a message as a payload...
+
 export const listBookings = () => async (dispatch, getState) => {
 
     try {

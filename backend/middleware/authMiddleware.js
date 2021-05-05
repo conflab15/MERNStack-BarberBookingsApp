@@ -1,7 +1,7 @@
-//authorise/validate access to protected pages such as profile and admin
-
 const jwt = require('jsonwebtoken')
 const Customer = require('../models/CustomerModel')
+
+//Here the jwt package will create a request header with an authorisation token to authenticate the active user to access sensitive routes to and from the API
 
 const protect  = async (req, res, next) => {
 
@@ -9,7 +9,7 @@ const protect  = async (req, res, next) => {
 
     try{
         if (token){
-       const decoded = jwt.verify(token, process.env.JWT_SECRET)
+       const decoded = jwt.verify(token, process.env.JWT_SECRET) //Create a token using the secret varialble in the .env
        console.log(decoded)
        req.customer = await Customer.findById(decoded.id).select('-password')
        }

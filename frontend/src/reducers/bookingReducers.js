@@ -1,3 +1,6 @@
+//Reducers are used to determine the changes to an applications state, which is based upon what the actions return, either successful or fails...
+//Reducers are used for state management, to define what action is initiated, and what payloads come back from this...
+
 export const bookingListReducer = (state = {allbookings: []}, action) =>{
 
     switch(action.type){

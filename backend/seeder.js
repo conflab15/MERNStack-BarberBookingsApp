@@ -11,6 +11,8 @@ const Review = require('./models/ReviewModel')
 
 const connectDB = require('./config/db')
 
+//Seeder file to create some dummy data to populate the database....
+
 //connects to db
 dotenv.config()
 connectDB()

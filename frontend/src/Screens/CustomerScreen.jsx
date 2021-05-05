@@ -59,8 +59,10 @@ const CustomerScreen = ({ history }) => {
 
     useEffect(() => {
 
-        //console.log("start of useEffect")
-        //console.log(customer.isAdmin)
+    //Note: Excessive use of console.log and res.json elements is to error test the admin functionality
+
+        console.log("start of useEffect")
+        console.log(customer.isAdmin)
 
         if (!customerInfo || error) {
             //dispatch(logout())
@@ -80,7 +82,8 @@ const CustomerScreen = ({ history }) => {
             setEmail(customer.email)
             setMobile(customer.mobile)
             setAdmin(customer.isAdmin)
-            console.log(customer.isAdmin) //Testing purposes to see the isAdmin value...
+            //Testing purposes to see the isAdmin value...
+            console.log(customer.isAdmin) 
         }
 
         if (customer) {
@@ -119,6 +122,7 @@ const CustomerScreen = ({ history }) => {
     }, [dispatch, history, success, complete, isAdmin, deleted])
 
     //ADMIN USE: confirms the booking by changing it's boolean value through a reducer...
+    //onClick functions from buttons on the CustomerScreen to change a state and perform an action...
     const ConfirmBooking = (booking) => {
         console.log(booking)
         dispatch(confirmBooking(booking))

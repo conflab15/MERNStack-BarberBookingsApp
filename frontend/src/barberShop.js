@@ -7,7 +7,7 @@ import { bookingByDayReducer, bookingConfirmReducer, bookingCompleteReducer, boo
 import { reviewListReducer } from './reducers/reviewReducers'
 //import { completeBooking } from './actions/bookingActions'
 
-//Use Reducers
+//Use Reducers are constructed here by defining what action is to be ran from a reducers change of state..
 const reducer = combineReducers({
     haircutList:haircutListReducer,
     haircutDetails:haircutDetailsReducer,

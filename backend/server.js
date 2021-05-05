@@ -2,6 +2,9 @@ const express = require('express')
 const dotenv = require('dotenv')
 const app = express()
 
+//This file creates the RESTful API to handle requests to and from the database, which is performed through reducers, states and actions
+//Here we connect to the db, harness the middleware, and the models to define what objects the program will be using...
+
 const connectDB = require('./config/db')
 
 //obtaining error handler middleware
@@ -37,7 +40,7 @@ app.get('/', (req, res)=>{
 //Haircut Routes -------------------------------------------------------
 //This app.get functions gets all the availabe haircuts within the db using an await and find function, and returning as a json object...
 app.get('/api/haircuts', async (req, res) => {
-    const haircuts = await Haircut.find({})
+    const haircuts = await Haircut.find({})//This finds all objects in the database
     res.json(haircuts)
     //res.send("Hello")
 })
@@ -46,7 +49,7 @@ app.get('/api/haircuts', async (req, res) => {
 app.get('/api/haircuts/:id', async (req, res) => {
     
     if(req.params.id.length === 24) {
-        const haircut = await Haircut.findById(req.params.id)
+        const haircut = await Haircut.findById(req.params.id) //This finds an object with a matching ID
         if(haircut){
             res.json(haircut)
         }
@@ -99,6 +102,7 @@ app.delete('/api/booking/delete/:id', protect, async(req, res) => {
         console.log('Booking found!')
         console.log(booking.id)
 
+        //Here we are deleting a booking which has the correct ID that's passed through in the parameters
         Booking.findByIdAndDelete(booking.id, function (error) {
             if(error) {
                 console.log(error)
@@ -134,6 +138,7 @@ app.post('/api/bookings/create', protect, async(req, res)=>{
         res.status(401).json({message:'customer not found!'})
     }
 
+    //Creating a booking, but not filling in all of the Booking Models data because it's auto assigned false by default
     const booking = await Booking.create({
         customer: loggedIncustomer,
         style,
@@ -236,6 +241,8 @@ app.post('/api/customers/login', async(req, res) => {
 
     console.log(email, password)
 
+    //Using the CustomerModel matchPassword to compare the stored hashed password to the one provided in the sign in form...
+    //If it matches, return the data to the app
     if (customer && (await customer.matchPassword(password))){
         res.json({
             _id: customer.id,
@@ -268,6 +275,7 @@ app.post('/api/customers/', async (req, res) => {
         throw new Error("This Customer has already registered")
     }
 
+    //Create a new Customer Object...
     const customer = await Customer.create({
         forename,
         surname,
